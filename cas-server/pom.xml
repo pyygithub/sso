@@ -16,7 +16,6 @@
     <description>CAS认证服务，用来实现认证和授权</description>
 
     <dependencies>
-
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp-tomcat</artifactId>
@@ -24,67 +23,157 @@
             <type>war</type>
             <scope>runtime</scope>
         </dependency>
+        <!--新增支持jdbc验证-->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!--加了依赖即将支持三种校验方式，包括文件存储用户校验器、拒绝用户校验器、shiro校验器-->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-generic</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!-- mysql 驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.16</version>
+        </dependency>
+        <!-- hsqldb驱动根据不同的数据库使用不同驱动 -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.4</version>
+        </dependency>
+        <!-- Custom Authentication -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <!-- Custom Configuration -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-configuration-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <!-- SpringSecurity Core -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.0.8.RELEASE</version>
+        </dependency>
+
+        <!-- 动态service 依赖 -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jpa-service-registry</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-services-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication-attributes</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <!-- 集成swagger Api -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.apereo.cas</groupId>
-                <artifactId>cas-server-support-bom</artifactId>
-                <version>${cas.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-bom</artifactId>
+            <version>${cas.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
     </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>com.rimerosolutions.maven.plugins</groupId>
-                <artifactId>wrapper-maven-plugin</artifactId>
-                <version>0.0.4</version>
-                <configuration>
-                    <verifyDownload>true</verifyDownload>
-                    <checksumAlgorithm>MD5</checksumAlgorithm>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${springboot.version}</version>
-                <configuration>
-                    <mainClass>org.springframework.boot.loader.WarLauncher</mainClass>
-                    <addResources>true</addResources>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <warName>cas</warName>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <recompressZippedFiles>false</recompressZippedFiles>
-                    <archive>
-                        <compress>false</compress>
-                        <manifestFile>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp-tomcat/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
-                    <overlays>
-                        <overlay>
-                            <groupId>org.apereo.cas</groupId>
-                            <artifactId>cas-server-webapp-tomcat</artifactId>
-                        </overlay>
-                    </overlays>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-            </plugin>
-        </plugins>
-        <finalName>cas</finalName>
+    <plugins>
+        <plugin>
+            <groupId>com.rimerosolutions.maven.plugins</groupId>
+            <artifactId>wrapper-maven-plugin</artifactId>
+            <version>0.0.4</version>
+            <configuration>
+                <verifyDownload>true</verifyDownload>
+                <checksumAlgorithm>MD5</checksumAlgorithm>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>${springboot.version}</version>
+            <configuration>
+                <mainClass>org.springframework.boot.loader.WarLauncher</mainClass>
+                <addResources>true</addResources>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <warName>cas</warName>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+                <recompressZippedFiles>false</recompressZippedFiles>
+                <archive>
+                    <compress>false</compress>
+                    <manifestFile>
+                        ${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp-tomcat/META-INF/MANIFEST.MF
+                    </manifestFile>
+                </archive>
+                <overlays>
+                    <overlay>
+                        <groupId>org.apereo.cas</groupId>
+                        <artifactId>cas-server-webapp-tomcat</artifactId>
+                    </overlay>
+                </overlays>
+
+                <!-- 排除系统自带服务初始化 -->
+                <dependentWarExcludes>
+                    **/services/*.json
+                </dependentWarExcludes>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.3</version>
+        </plugin>
+    </plugins>
+    <finalName>cas</finalName>
     </build>
 
 </project>

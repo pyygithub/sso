@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.thtf.cas.config.CustomAuthenticationConfiguration,\
+com.thtf.cas.config.CasSwaggerConfiguration,\
+com.thtf.cas.controller.ServiceController
