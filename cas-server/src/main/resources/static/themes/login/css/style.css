@@ -1,0 +1,247 @@
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		.login-box {
+			background: url(../img/bg.jpg) no-repeat;
+			height: calc(100vh);
+			width: 100%;
+			background-size: cover;
+			display: flex;
+			align-items: center;
+			min-width: 1200px;
+			justify-content: center;
+		}
+
+		.login-box h1 {
+			font-size: 22px;
+			color: #ffffff;
+			text-align: center;
+			font-weight: normal;
+			margin-bottom: 20px;
+		}
+		.el-icon-close:before{
+			content: "×" !important;
+		}
+		.login-box .bg1 {
+			width: 480px;
+			height: 340px;
+			margin: 0px auto;
+			background-color: rgba(255, 255, 255, 0.2);
+			box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+			margin-top: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.login-box .bg1 .bg2 {
+			width: 432px;
+			height: 292px;
+			background-color: #ededed;
+			box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.login-box .bg1 .bg3 {
+			display: flex;
+			width: 420px;
+			height: 280px;
+			background-color: #ffffff;
+			box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+			justify-content: center;
+			align-items: center;
+			font-size: 14px;
+		}
+
+		.login-box form {
+			display: flex;
+			flex-direction: column;
+			width: 320px;
+			padding-top: 10px;
+		}
+
+		.login-box form div.customInput {
+			height: 45px;
+			line-height: 45px;
+			margin-bottom: 24px;
+			box-shadow: 0px 3px 0px 0px rgba(255, 255, 255, 0.2);
+			border-radius: 3px;
+			border: solid 1px #c5c5c5;
+		}
+
+		.login-box form div.customInput i {
+			width: 40px;
+			height: 45px;
+			display: inline-block;
+			background: #f9f9f9;
+			text-align: center;
+		}
+
+		.login-box form div.customInput i::before {
+			color: #b2b2b2;
+			font-size: 20px;
+		}
+
+		.login-box form input {
+			height: 38px;
+			line-height: 40px;
+			border: none;
+			outline: none;
+			color: #666666;
+			font-size: 14px;
+			width: 80%;
+			height: 40px;
+			opacity: 0.6;
+		}
+
+		.login-box form .login-btn {
+			font-family: MicrosoftYaHei;
+			font-size: 16px;
+			line-height: 46px;
+			text-align: center;
+			letter-spacing: 10px;
+			width: 320px;
+			height: 46px;
+			background: #2a7cc1;
+			box-shadow: 0px 2px 0px 0px #1f5d91;
+			border-radius: 3px;
+			margin-top: 10px;
+			color: #fff;
+			outline: none;
+			cursor: pointer;
+		}
+
+		.remember a {
+			font-size: 12px;
+			text-decoration: none;
+			color: #1890f7
+		}
+
+		.remember {
+			display: flex;
+			justify-content: space-between;
+			font-size: 12px;
+			margin-top: -5px;
+			margin-bottom: 5px;
+		}
+
+		.el-checkbox.ctt .el-checkbox__label {
+			font-size: 12px !important;
+		}
+
+		::-webkit-input-placeholder {
+			color: #bebebe;
+		}
+
+		.logo {
+			display: flex;
+			align-items: center;
+			font-size: 28px;
+			color: #fff;
+			flex-direction: column;
+		}
+
+		.logo .title {
+			line-height: 23px;
+			text-align: left;
+			flex-shrink: 0;
+			font-size: 26px;
+			margin-top: 20px;
+		}
+
+		.logo span {
+			font-size: 14px;
+		}
+
+		.linear {
+			width: 100%;
+			height: 2px;
+			margin-top: 10px;
+			background: linear-gradient(to right,
+				rgba(255, 255, 255, 0) 0%,
+				rgba(255, 255, 255, 0) 10%,
+				rgba(255, 255, 255, 0.3) 20%,
+				rgba(255, 255, 255, 0.4) 30%,
+				rgba(255, 255, 255, 0.5) 40%,
+				rgba(255, 255, 255, 1) 50%,
+				rgba(255, 255, 255, 0.5) 60%,
+				rgba(255, 255, 255, 0.4) 70%,
+				rgba(255, 255, 255, 0.3) 80%,
+				rgba(255, 255, 255, 0) 90%,
+				rgba(255, 255, 255, 0) 100%)
+		}
+
+		.login-box .el-dialog {
+			border-radius: 5px 5px 0 0;
+		}
+
+		.login-box .el-dialog .el-dialog__header {
+			border-radius: 5px 5px 0 0;
+			padding: 0px;
+			box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.45);
+			height: 45px;
+			line-height: 45px;
+		}
+
+		.login-box .el-dialog .el-dialog__header .el-dialog__title {
+			line-height: 24px;
+			font-size: 16px;
+			color: #333;
+		}
+
+		.login-box .el-dialog .el-dialog__header .el-dialog__headerbtn {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			padding: 0;
+			background: 0 0;
+			border: none;
+			outline: 0;
+			cursor: pointer;
+			font-size: 24px;
+		}
+
+		.repwd {
+			width: 372px;
+			height: 190px;
+			margin: 0px auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.repwd button {
+			width: 100px;
+			height: 40px;
+			background-image: linear-gradient(0deg, #297bc0 0%, #3d90d6 100%), linear-gradient(#2488ee, #2488ee);
+			background-blend-mode: normal, normal;
+			border: none;
+			box-shadow: 0px 2px 0px 0px #1f5d91, inset 0px 1px 2px 0px rgba(238, 246, 255, 0.75);
+			outline: none;
+			color: #fff;
+			font-size: 14px;
+			margin-top: 30px;
+			margin-bottom: 30px;
+			cursor: pointer;
+		}
+		.updateUname{
+			height:30px;
+			height: 30px;
+    width: 100%;
+		}
+		.updateUname input{
+			border: none;
+    border-bottom: 1px solid #dcdcdc;
+    outline: none;
+    width: 85%;
+    padding-left: 5px;
+    height: 30px;
+		}

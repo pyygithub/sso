@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{${#themes.code('index.css.style')}}"/>
+    <link rel="stylesheet" th:href="@{${#themes.code('login.css.elementui')}}"/>
+    <link rel="stylesheet" th:href="@{${#themes.code('login.css.iconfont')}}"/>
+    <link rel="shortcut icon" href="@{${#themes.code('login.img.path')} + '/favicon.ico'}" type="image/vnd.microsoft.icon">
+</head>
+
+<body>
+<div id="app">
+    <div class="login-box">
+        <div ref="scaleBox" style="width: 60%;">
+            <div class="logo">
+                <div class="title">
+                    CAS单点登录后台系统
+                </div>
+            </div>
+            <div class="linear"></div>
+            <div class="bg1">
+
+                <div class="bg2">
+                    <div class="bg3">
+                        <form id="postForm" autocomplete="off" method="post" th:object="${credential}">
+                            <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
+                            <input type="hidden" name="_eventId" value="submit"/>
+                            <input type="hidden" name="geolocation"/>
+                            <div class="customInput">
+                                <i class="iconfont icon-man"></i>
+                                <input class="username"
+                                       id="username"
+                                       size="25"
+                                       v-model.trim="username"
+                                       tabindex="1"
+                                       placeholder="请输入用户名"
+                                       type="text"
+                                       th:disabled="${guaEnabled}"
+                                       th:field="*{username}"
+                                       th:accesskey="#{screen.welcome.label.netid.accesskey}"
+                                       autocomplete="off"/>
+                            </div>
+                            <div class="customInput">
+                                <i class="iconfont icon-suo"></i>
+                                <!-- <input type="password" name="password" class="password" v-model.trim="password" autocomplete="off"
+                                    placeholder="请输入密码"> -->
+                                <input class="password"
+                                       type="password"
+                                       id="password"
+                                       size="25"
+                                       tabindex="2"
+                                       placeholder="请输入密码"
+                                       th:accesskey="#{screen.welcome.label.password.accesskey}"
+                                       th:field="*{password}"
+                                       autocomplete="off"/>
+                            </div>
+                            <div th:if="${#fields.hasErrors('*')}">
+                                <span th:each="err : ${#fields.errors('*')}" th:utext="${err}"/>
+                            </div>
+                            <div class="remember">
+                                <el-checkbox label="记住用户名" name="rememberMe" v-model="rememberMe" class="ctt"></el-checkbox>
+                                <a href="javascript:;" @click='centerDialogVisible = true'>忘记密码</a>
+                            </div>
+                            <button class="login-btn" @click="checkUser" name="submit" accesskey="l"
+                                    th:value="#{screen.welcome.button.login}" type="submit">登录
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 忘记密码 -->
+        <el-dialog title="重置密码" :visible.sync="centerDialogVisible" @close="handleClose" width="676px" center>
+            <div class="repwd">
+                <div class="updateUname">登录名:<input v-model='updateUname' type="text"></div>
+                <button class="subpwd" @click='postPwd'>初始化密码</button>
+                <span v-if='sendstatus'>已给管理员发送初始化密码消息,请电话联系XXXXXXXXXXX.</span>
+            </div>
+        </el-dialog>
+    </div>
+</div>
+</body>
+<script th:src="@{${#themes.code('login.js.vue')}}"></script>
+<script th:src="@{${#themes.code('login.js.elementui')}}"></script>
+<script th:src="@{${#themes.code('login.js.jquery')}}"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                scale: 1,
+                rememberMe: false,
+                username: "",
+                password: "",
+                updateUname: '',
+                status: false,
+                sendstatus: false,
+                centerDialogVisible: false
+            }
+        },
+        mounted: function () {
+            if (this.getCookie('user')) {
+                this.username = this.getCookie('user')
+            }
+        },
+
+        methods: {
+            initPageSize: function () {
+                this.scale = window.innerWidth < 1200 ? 1200 / 1920 : window.innerWidth / 1920;
+                this.$refs.scaleBox.style.transform = 'scale(' + this.scale + ')';
+            },
+            checkUser: function () {
+                if (this.rememberMe) {
+                    this.setCookie('user', this.username)
+                }
+            },
+            setCookie: function (name, value) {
+                console.log(name, value)
+                var Days = 9;
+                var exp = new Date();
+                exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+                document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+            },
+            getCookie: function (name) {
+                var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+                if (arr = document.cookie.match(reg))
+                    return unescape(arr[2]);
+                else
+                    return null;
+            },
+            handleClose: function () {
+                this.updateUname = ''
+                this.sendstatus = false
+            },
+            postPwd: function () {
+                var ip = "[[${#themes.code('server.url')}]]";
+                var url = ip + "/initpass/msg";
+                var _this = this;
+                $.ajax({
+                    type: "post",    //请求类型
+                    url: url,//请求的 URL地址
+                    data: {username: this.updateUname},
+                    success: function (data) {
+                        if (data.code == 200) {
+                            _this.sendstatus = true
+                        } else {
+                            alert(data.message)
+                        }
+                    },
+                    error: function (data) {
+                        alert(data.result);
+                    }
+                });
+            }
+        }
+    })
+</script>
+
+</html>

@@ -46,7 +46,8 @@ public class ServiceController {
             service.setServiceId(a);
             service.setId(id);
             service.setAttributeReleasePolicy(re);
-            service.setName("login");
+            service.setTheme("login");
+
             //这个是为了单点登出而作用的
             service.setLogoutUrl(new URL("http://"+serviceId));
             servicesManager.save(service);
